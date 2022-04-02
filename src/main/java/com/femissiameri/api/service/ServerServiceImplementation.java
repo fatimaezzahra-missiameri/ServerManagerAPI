@@ -78,6 +78,6 @@ public class ServerServiceImplementation implements ServerService {
                 "server6.png"
         };
 
-        return "/servers/images/" + imageNames[new Random().nextInt(6)];
+        return "http://localhost:8080/api/servers/images/" + imageNames[new Random().nextInt(6)];
     }
 }
