@@ -1,6 +1,5 @@
 package com.femissiameri.api.service;
 
-import com.femissiameri.api.model.EStatus;
 import com.femissiameri.api.model.Server;
 import com.femissiameri.api.repository.ServerRepository;
 import lombok.RequiredArgsConstructor;
