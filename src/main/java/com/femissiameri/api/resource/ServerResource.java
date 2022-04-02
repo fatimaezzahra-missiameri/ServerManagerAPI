@@ -1,25 +1,22 @@
 package com.femissiameri.api.resource;
 
-import com.femissiameri.api.model.EStatus;
 import com.femissiameri.api.model.Response;
 import com.femissiameri.api.model.Server;
 import com.femissiameri.api.service.ServerServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Objects;
 
-import static com.femissiameri.api.model.EStatus.*;
+import static com.femissiameri.api.model.EStatus.SERVER_UP;
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -99,6 +96,6 @@ public class ServerResource {
 
     @GetMapping(value = "/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getServerImage(@PathVariable("imageName") String imageName) throws IOException {
-        return Files.readAllBytes(Path.of(ResourceUtils.getFile(imageName).getPath()));
+        return Files.readAllBytes(Path.of(ResourceUtils.getFile("classpath:images/" + imageName).getPath()));
     }
 }
