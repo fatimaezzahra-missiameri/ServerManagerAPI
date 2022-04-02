@@ -27,7 +27,7 @@ public class ServerServiceImplementation implements ServerService {
     private final ServerRepository serverRepository;
 
     @Override
-    public Server create(Server server) throws FileNotFoundException {
+    public Server create(Server server) {
         log.info("Saving new server {}", server.getName());
         server.setImageUrl(setServerImageUrl());
         return serverRepository.save(server);
@@ -39,7 +39,7 @@ public class ServerServiceImplementation implements ServerService {
         Server server = serverRepository.findByIpAddress(ipAddress);
         InetAddress address = InetAddress.getByName(ipAddress);
         server.setStatus(address.isReachable(10000) ? SERVER_UP : SERVER_DOWN);
-        return null;
+        return server;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ServerServiceImplementation implements ServerService {
         return true;
     }
 
-    private String setServerImageUrl() throws FileNotFoundException {
+    private String setServerImageUrl() {
         String[] imageNames = {
                 "server1.png",
                 "server2.png",
@@ -78,6 +78,6 @@ public class ServerServiceImplementation implements ServerService {
                 "server6.png"
         };
 
-        return ResourceUtils.getFile("images/" + imageNames[new Random().nextInt(6)]).toString();
+        return "/servers/images/" + imageNames[new Random().nextInt(6)];
     }
 }
